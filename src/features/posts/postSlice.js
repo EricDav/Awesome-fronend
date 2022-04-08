@@ -7,7 +7,6 @@ const postsSlice = createSlice({
     initialState,
     reducers: {
         fetchPosts(state, action) {
-            console.log(action.payload, '===>>>>')
             state.data = action.payload.data;
             state.total = action.payload.total;
         }

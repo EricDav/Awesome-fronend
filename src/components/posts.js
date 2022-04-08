@@ -7,7 +7,11 @@ import axios from 'axios';
 import { useHistory } from "react-router-dom";
 
 export const PostsList = () => {
+  const history = useHistory();
   useEffect(() => {
+    if (!localStorage.getItem('currentUser')) {
+      history.push('/');
+    }
     fetchPost(1);
   }, []);
   const posts = useSelector(state => state.posts)
@@ -18,7 +22,7 @@ export const PostsList = () => {
     headers: {'X-Custom-Header': 'foobar'}
   });
   const limit = 6;
-  const history = useHistory();
+  
   const fetchPost = async (pageNumber) => {
     try {
       const response = await instance.get(`/posts?limit=${limit}&pageNumber=${pageNumber}`);
@@ -74,8 +78,6 @@ export const PostsList = () => {
     initalTotal = initalTotal - limit;
   }
 
-  console.log(paginations, 'Paginations.....')
-
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const renderedPosts = posts.data.map(post => (
         <div  
@@ -112,9 +114,13 @@ export const PostsList = () => {
         >
         </textarea>
       </AddPostModal>
-      <div className="leftcolumn">
+      {renderedPosts && <div className="leftcolumn">
         {renderedPosts}
-      </div>
+      </div>}
+
+      {!renderedPosts && <div className="leftcolumn">
+          <h4>No post yet, click add post post button!</h4>
+      </div>}
       <div className="pagination">
         <a 
           onClick={() => {
