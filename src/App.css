@@ -51,14 +51,14 @@
   text-align: center;
   padding: 12px;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 13px;
   line-height: 25px;
   border-radius: 4px;
 }
 
 /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
 .header a.logo {
-  font-size: 25px;
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -135,13 +135,14 @@ input[type=submit]:hover {
 
 body {
   font-family: Arial;
-  padding: 20px;
+  /* padding: 20px; */
   background: #f1f1f1;
 }
 
 /* Header/Blog Title */
 .header {
-  padding: 30px;
+  padding: 20px;
+  margin-bottom: 20px;
   font-size: 40px;
   text-align: center;
   background: white;
@@ -153,6 +154,7 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-left: 60px;
 }
 
 /* Fake image */
@@ -165,10 +167,11 @@ body {
 /* Add a card effect for articles */
 .card {
   background-color: white;
+  border-radius: 20px;
   padding: 20px;
   margin-top: 20px;
   min-width: 45%;
-  margin-left: 10px;
+  margin-left: 20px;
   cursor: pointer;
   text-align: left;
   min-height: 200px;

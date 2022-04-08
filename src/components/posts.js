@@ -4,6 +4,7 @@ import "./posts.css"
 import AddPostModal from './addPostModal'
 import { fetchPosts } from '../features/posts/postSlice';
 import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 export const PostsList = () => {
   useEffect(() => {
@@ -17,6 +18,7 @@ export const PostsList = () => {
     headers: {'X-Custom-Header': 'foobar'}
   });
   const limit = 6;
+  const history = useHistory();
   const fetchPost = async (pageNumber) => {
     try {
       const response = await instance.get(`/posts?limit=${limit}&pageNumber=${pageNumber}`);
@@ -34,7 +36,6 @@ export const PostsList = () => {
   const onTitleChanged = e => setTitle(e.target.value);
   const onContentChanged = e => setContent(e.target.value);
   const dispatch = useDispatch();
-
 
   const savePost = async () => {
     try {
@@ -60,6 +61,10 @@ export const PostsList = () => {
     }
   }
 
+  const goToSinglePost = (postId) => {
+    history.push(`/posts/${postId}`);
+  }
+
   const paginations = [];
   let initalTotal = posts.total;
   let count = 0;
@@ -73,7 +78,13 @@ export const PostsList = () => {
 
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const renderedPosts = posts.data.map(post => (
-        <div className="card" key={post.id}>
+        <div  
+          className="card" 
+          key={post.id}
+          onClick={() => {
+            goToSinglePost(post.id)
+          }}
+        >
             <h2>{post.title}</h2>
             <h5>{new Date(post.createdAt).toLocaleDateString("en-US", options)} | {post.name}</h5>
             <p>{post.content.substring(0, 100)}</p>
@@ -105,17 +116,33 @@ export const PostsList = () => {
         {renderedPosts}
       </div>
       <div className="pagination">
-        <a>&laquo;</a>
+        <a 
+          onClick={() => {
+            if (currentPage > 1) {
+              setCurrentPage(currentPage - 1);
+              fetchPost(currentPage - 1);
+            }
+          }}
+        >&laquo;
+        </a>
         {paginations.map(num => (
           <a className={num === currentPage ? 'active': ''}
           key={num} 
           onClick={async () => {
-             console.log(num, 'Fucking count.....')
              setCurrentPage(num);
              fetchPost(num)
           }}>{num}</a>
          ))}
-        <a>&raquo;</a>
+        <a
+          onClick={() => {
+            if (currentPage < paginations.length) {
+              setCurrentPage(currentPage + 1);
+              fetchPost(currentPage + 1)
+            }
+          }}
+        >
+          &raquo;
+          </a>
       </div>
     </section>
   )

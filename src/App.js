@@ -33,7 +33,7 @@ function App() {
           <Route
             exact
             path="/posts/:postId"
-            component={PostsList}
+            component={SinglePost}
           />
           <Redirect to="/" />
         </Switch>
