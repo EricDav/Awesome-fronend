@@ -88,8 +88,8 @@ export const PostsList = () => {
           }}
         >
             <h2>{post.title}</h2>
-            <h5>{new Date(post.createdAt).toLocaleDateString("en-US", options)} | {post.name}</h5>
-            <p>{post.content.substring(0, 100)}</p>
+            <h5 style={{marginTop: 5}}>{new Date(post.createdAt).toLocaleDateString("en-US", options)} | {post.name}</h5>
+            <p style={{marginTop: 15}}>{post.content.substring(0, 100) + ' ...'}</p>
         </div>
   ))
 
