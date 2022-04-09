@@ -7,7 +7,7 @@ import Comment  from './comment';
 
 export const SinglePost = () => {
     const instance = axios.create({
-        baseURL: 'http://localhost:4000',
+        baseURL: 'https://awesome-blog1.herokuapp.com',
         timeout: 1000,
         headers: {'X-Custom-Header': 'foobar'}
     });

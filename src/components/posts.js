@@ -17,7 +17,7 @@ export const PostsList = () => {
   const posts = useSelector(state => state.posts)
   const [show, setShow] = useState(false);
   const instance = axios.create({
-    baseURL: 'http://localhost:4000',
+    baseURL: 'https://awesome-blog1.herokuapp.com',
     timeout: 1000,
     headers: {'X-Custom-Header': 'foobar'}
   });
