@@ -8,18 +8,18 @@ import { useHistory } from "react-router-dom";
 
 export const PostsList = () => {
   const history = useHistory();
+  const defaultPageNumber = 1;
   useEffect(() => {
     if (!localStorage.getItem('currentUser')) {
       history.push('/');
     }
-    fetchPost(1);
+    fetchPost(defaultPageNumber);
   }, []);
   const posts = useSelector(state => state.posts)
   const [show, setShow] = useState(false);
   const instance = axios.create({
     baseURL: 'https://awesome-blog1.herokuapp.com',
-    timeout: 1000,
-    headers: {'X-Custom-Header': 'foobar'}
+    timeout: 5000,
   });
   const limit = 6;
   
@@ -89,7 +89,7 @@ export const PostsList = () => {
         >
             <h2>{post.title}</h2>
             <h5 style={{marginTop: 5}}>{new Date(post.createdAt).toLocaleDateString("en-US", options)} | {post.name}</h5>
-            <p style={{marginTop: 15}}>{post.content.substring(0, 100) + ' ...'}</p>
+            <p style={{marginTop: 15}}>{post.content.substring(0, 100) + (post.content.length > 100 ? '...' : '')}</p>
         </div>
   ))
 
