@@ -19,7 +19,7 @@ export const PostsList = () => {
   const [show, setShow] = useState(false);
   const instance = axios.create({
     baseURL: 'https://awesome-blog1.herokuapp.com',
-    timeout: 5000,
+    timeout: 10000,
   });
   const limit = 6;
   
