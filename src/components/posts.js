@@ -114,7 +114,7 @@ export const PostsList = () => {
         >
         </textarea>
       </AddPostModal>
-      {renderedPosts && <div className="leftcolumn">
+      {posts.data && posts.data.length > 0 && <div className="leftcolumn">
         {renderedPosts}
       </div>}
 

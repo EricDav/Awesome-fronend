@@ -197,6 +197,17 @@ body {
   .leftcolumn, .rightcolumn {
     width: 100%;
     padding: 0;
+    margin-left: unset;
+  }
+  .card {
+    width: 90%;
+  }
+  .align-left {
+    margin-left: 20px !important;
+  }
+  .list {
+    margin-left: 20px !important;
+    margin-right: 10px !important;
   }
 }
 
